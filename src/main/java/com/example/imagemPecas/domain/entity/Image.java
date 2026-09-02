@@ -8,11 +8,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.auditing.config.AuditingConfiguration;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-
 
 @Entity
 @Table
@@ -21,7 +19,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class image {
+
+public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
@@ -30,7 +29,7 @@ public class image {
     @Column
     private Long size;
     @Column
-    @Enumerated (EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private ImageExtension extension;
     @Column
     @CreatedDate
@@ -40,6 +39,4 @@ public class image {
     @Column
     @Lob
     private byte[] file;
-
-
 }
