@@ -23,6 +23,7 @@ import java.util.List;
 public class ImagesController {
 
     private final ImageService service;
+    private final ImageMapper mapper;
 
     @PostMapping
     public ResponseEntity save(
@@ -33,15 +34,9 @@ public class ImagesController {
     {
         log.info("Imagem recebida: name: {}, size: {}", file.getOriginalFilename(), file.getSize());
 
+        Image image = mapper.mapToImage(file, name, tags);
+        Image savedImage = service.save(image);
 
-        Image image = Image.builder()
-                .name(name)
-                .tags(String.join(",",tags))
-                .size(file.getSize())
-                .extension(ImageExtension.valueof(MediaType.valueOf(file.getContentType())))
-                .file(file.getBytes())
-                .build();
-        service.save(image);
 
         return  ResponseEntity.ok().build();
     }
