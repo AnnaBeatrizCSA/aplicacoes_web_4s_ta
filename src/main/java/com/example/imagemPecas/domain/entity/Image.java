@@ -1,6 +1,5 @@
 package com.example.imagemPecas.domain.entity;
 
-
 import com.example.imagemPecas.domain.enums.ImageExtension;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,7 +18,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -39,4 +37,8 @@ public class Image {
     @Column
     @Lob
     private byte[] file;
+
+    public String getFileName(){
+        return getName().concat("").concat(getExtension().name());
+    }
 }
